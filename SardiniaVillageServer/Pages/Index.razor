@@ -1,0 +1,46 @@
+﻿@page "/"
+
+@using SardiniaVillageServer.Models
+
+@*<h1>Hello, world!</h1>
+
+    Welcome to your new app.
+
+    <SurveyPrompt Title="How is Blazor working for you?" />*@
+
+<h2 class="bg-light border p-2">
+    Stanze Disponibili
+</h2>
+Stanza: @Room.Description
+<br />
+Prezzo: € @Room.Price a Notte
+<br />
+<input type="number" @bind-value="@Room.Price" @bind-value:event="oninput" />
+<br />
+<input type="checkbox" @bind-value="Room.IsFree" checked="@(Room.IsFree ? "checked" : null)"  /> &nbsp; Libera
+<br />
+<span>Buongiorno, attualmente la stanza @Room.Description è @(Room.IsFree ? "Libera" : "Occupata")</span>
+<br />
+<select @bind="Room.Price">
+    @foreach (var price in Room.Prices)
+    {
+        <option value="@price.PriceRoom">@price.Description</option>
+    }
+</select>
+
+
+    @code {
+        Rooms Room = new Rooms()
+        {
+            Id = 1150,
+            Description = "Fronte Mare A1",
+            Price = 110,
+            IsFree = true,
+            Prices = new List<Price>
+            {
+                new Price{Id=1,Description="Alta Stagione",PriceRoom=110 },
+                new Price{Id=2,Description="Media Stagione",PriceRoom=80 },
+                new Price{Id=3,Description="Bassa Stagione",PriceRoom=50 },
+            }
+        };
+    }
