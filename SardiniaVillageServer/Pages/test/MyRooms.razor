@@ -1,0 +1,86 @@
+﻿@page "/rooms"
+
+@using Models;
+
+
+
+<h2 class="bg-light border p-2">
+    Stanze Disponibili
+</h2>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price/Day</th>
+            <th scope="col">Free</th>
+            <th scope="col">Type</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var room in RoomList)
+        {
+            <tr>
+                <td>@room.Id</td>
+                <td>@room.Description</td>
+                <td>@room.Price</td>
+                <td>@room.IsFree</td>
+                <td>
+                    <select @bind="room.Price" class="custom-select">
+                        @foreach (var prezzo in room.Prices)
+                        {
+                            <option value="@prezzo.PriceRoom">@prezzo.Description</option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <button class="btn btn-success"
+                            @onclick="@(() => Prenota(@room))">
+                        Prenota
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<span>@info</span>
+
+
+@code {
+
+    List<Rooms> RoomList = new List<Rooms>();
+
+    string info = "";
+
+    private void Prenota(Rooms room)
+    {
+        this.info = $"Hai prenotato la stanza {room.Description} al costo di € {room.Price} al giorno!";
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        RoomList.Add(new Rooms(1150, "Fronte Mare A1", 110, true, new List<Price>
+    {
+                new Price(1,"Alta Stagione",110),
+                new Price(2,"Media Stagione",80),
+                new Price(3,"Bassa Stagione",50)
+            }));
+
+        RoomList.Add(new Rooms(1151, "Fronte Mare A4", 320, true, new List<Price>
+    {
+                new Price(1,"Alta Stagione",320),
+                new Price(2,"Media Stagione",160),
+                new Price(3,"Bassa Stagione",90)
+            }));
+
+        RoomList.Add(new Rooms(1152, "Fronte Mare A2", 240, true, new List<Price>
+    {
+                new Price(1,"Alta Stagione",240),
+                new Price(2,"Media Stagione",110),
+                new Price(3,"Bassa Stagione",70)
+            }));
+    }
+}

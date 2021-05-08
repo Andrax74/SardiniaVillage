@@ -13,6 +13,16 @@ namespace SardiniaVillageServer.Models
         public bool IsFree { get; set; }
         public List<Price> Prices { get; set; }
 
+        public Rooms(int id, string description, double price, bool isFree, List<Price> prices)
+        {
+            Id = id;
+            Description = description;
+            Price = price;
+            IsFree = isFree;
+            Prices = prices;
+        }
+
+
     }
 
   
