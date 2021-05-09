@@ -48,3 +48,13 @@ a, .btn-link {
         right: 0.75rem;
         top: 0.5rem;
     }
+
+.roomCard {
+    margin: 25px 15px 25px 25px;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 13vw;
+    object-fit: cover;
+}

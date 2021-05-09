@@ -2,13 +2,32 @@
 
 @using Models;
 @using SardiniaVillageServer.Pages.Hotels.Components;
+@using SardiniaVillageServer.Data
+@inject RoomsService roomsService
 
 <h2 class="bg-light border p-2">
-   Info Stanze
+    Info Stanze
 </h2>
 
-<Room></Room>
+<div class="row">
+    @foreach (var Myroom in RoomList)
+    {
+        <div class="roomCard">
+            <Room room=Myroom />
+        </div>
+    }
+</div>
 
 @code {
+
+    List<Rooms> RoomList;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        RoomList = roomsService.GetRooms();
+
+    }
 
 }
