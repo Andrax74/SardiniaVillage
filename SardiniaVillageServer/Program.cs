@@ -14,10 +14,19 @@ namespace SardiniaVillageServer
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
+
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                /*
+                 .ConfigureLogging(logging =>
+                 {
+                     logging.ClearProviders();
+                     logging.SetMinimumLevel(LogLevel.Trace);
+                 })
+                .UseNLog()  // NLog: setup NLog for Dependency injection
+                */
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

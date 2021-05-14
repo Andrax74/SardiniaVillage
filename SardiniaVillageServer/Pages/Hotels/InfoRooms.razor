@@ -13,12 +13,20 @@
     @foreach (var Myroom in RoomList)
     {
         <div class="roomCard">
-            <Room room=Myroom />
+            <Room room=Myroom OnRoomClick="BookRoom" />
         </div>
     }
 </div>
 
+@if (@BookedRoom != null)
+{
+    <span>Hai prenotato la stanza @BookedRoom.Description</span>
+}
+
+
 @code {
+
+    public Rooms BookedRoom { get; set; }
 
     List<Rooms> RoomList;
 
@@ -27,6 +35,14 @@
         base.OnInitialized();
 
         RoomList = roomsService.GetRooms();
+
+    }
+
+    protected void BookRoom(int idRoom)
+    {
+        this.BookedRoom = this.RoomList.Where(e => e.Id == idRoom).First();
+
+        //this.BookedRoom = room;
 
     }
 
