@@ -13,7 +13,10 @@
     @foreach (var Myroom in RoomList)
     {
         <div class="roomCard">
-            <Room room=Myroom OnRoomClick="BookRoom" />
+            <Room room=Myroom OnRoomClick="BookRoom">
+                <ChildContent>@((Myroom.IsFree) ? "Libera" : "Occupata")</ChildContent>
+                <InfoScadenza>@((Myroom.IsFree) ? "" : "sino al 15/06/21")</InfoScadenza>
+            </Room>
         </div>
     }
 </div>

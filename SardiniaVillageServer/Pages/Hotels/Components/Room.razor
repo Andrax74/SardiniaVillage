@@ -10,9 +10,10 @@
     <ul class="list-group list-group-flush">
         <li class="list-group-item">Letti: @room.Beds</li>
         <li class="list-group-item">Prezzo a notte: @room.Price.ToString("C", CultureInfo.CurrentCulture)</li>
+        <li class="list-group-item">Stato: @ChildContent @InfoScadenza</li>
     </ul>
     <div class="card-body">
-        <button type="button" @onclick="@((args) => BookRoom(args, @room.Id))" class="btn btn-primary">Prenota</button>
+        <button type="button" @onclick="@((args) => BookRoom(args, @room.Id))" class="btn btn-primary" disabled="@(!room.IsFree)">Prenota</button>
         <button type="button" class="btn btn-warning">Annulla</button>
     </div>
 </div>
@@ -24,6 +25,12 @@
 
     [Parameter]
     public EventCallback<int> OnRoomClick { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public RenderFragment InfoScadenza { get; set; }
 
     protected async Task BookRoom(MouseEventArgs e, int value)
     {

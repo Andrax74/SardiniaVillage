@@ -37,6 +37,14 @@ namespace SardiniaVillageServer.Data
 				new Price(3,"Bassa Stagione",70)
 			}));
 
+		   RoomList.Add(new Rooms(1153, "Fronte Mare A2 Full", "Pensione Completa con stanza vista mare.", 240, false, 2, "images/1153.jpg",
+		   new List<Price>
+		   {
+						new Price(1,"Alta Stagione",280),
+						new Price(2,"Media Stagione",150),
+						new Price(3,"Bassa Stagione",110)
+		   }));
+
 			return RoomList;
 		}
     }
