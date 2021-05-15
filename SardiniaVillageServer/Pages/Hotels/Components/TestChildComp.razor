@@ -1,0 +1,22 @@
+﻿<div>
+    <h4 class="text-primary pt-3">@InputAttributes.GetValueOrDefault("Intestazione")</h4>
+    <input id="textTest" @attributes="InputAttributes" />
+</div>
+
+@code {
+
+    /*
+    [Parameter]
+    public string MaxLen { get; set; }
+    [Parameter]
+    public string PlaceHolder { get; set; }
+    [Parameter]
+    public string Required { get; set; }
+    [Parameter]
+    public string Intestazione { get; set; }
+    */
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> InputAttributes { get; set; } = new Dictionary<string, object>();
+
+}
