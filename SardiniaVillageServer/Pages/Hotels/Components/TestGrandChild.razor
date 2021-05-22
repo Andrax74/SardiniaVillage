@@ -1,10 +1,15 @@
 ﻿<div class="alert alert-primary" role="alert">
     @Message
 </div>
+<div class="alert alert-danger" role="alert">
+    @Message2
+</div>
 
 @code {
-
-    [CascadingParameter]
+    [CascadingParameter(Name = "Messaggio1")]
     public string Message { get; set; }
+
+    [CascadingParameter(Name = "Messaggio2")]
+    public string Message2 { get; set; }
 
 }

@@ -1,0 +1,28 @@
+﻿@page "/bookroom"
+@inject NavigationManager navigationManager
+
+<p>IdPromo: @idRoom</p>
+<p>In Promo: @isPromo.ToString()</p>
+
+<button type="button" class="btn btn-warning" @onclick="Annulla">Annulla</button>
+
+@code {
+
+    private string idRoom;
+    private bool isPromo;
+
+    protected override void OnInitialized()
+    {
+        var absoluteUri = new Uri(navigationManager.Uri);
+        var queryParam = System.Web.HttpUtility.ParseQueryString(absoluteUri.Query);
+
+        idRoom = queryParam["IdRoom"];
+        isPromo = (queryParam["Promo"].Equals("true")) ? true : false;
+
+    }
+
+    private void Annulla()
+    {
+        navigationManager.NavigateTo("/info");
+    }
+}

@@ -1,4 +1,8 @@
 ﻿@page "/info"
+@page "/info/{idRoom}"
+@page "/info/{idRoom}/{IsPromo}"
+@page "/myrooms"
+
 
 @using Models;
 @using SardiniaVillageServer.Pages.Hotels.Components;
@@ -15,11 +19,13 @@
     @foreach (var Myroom in RoomList)
     {
         <div class="roomCard">
-            <CascadingValue Value="@InfoPromo">
-                <Room room=Myroom OnRoomClick="BookRoom">
-                    <ChildContent>@((Myroom.IsFree) ? "Libera" : "Occupata")</ChildContent>
-                    <InfoScadenza>@((Myroom.IsFree) ? "" : "sino al 15/06/21")</InfoScadenza>
-                </Room>
+            <CascadingValue Value="@InfoPromo" Name="Messaggio1">
+                <CascadingValue Value="@InfoPromo2" Name="Messaggio2">
+                    <Room room=Myroom OnRoomClick="BookRoom">
+                        <ChildContent>@((Myroom.IsFree) ? "Libera" : "Occupata")</ChildContent>
+                        <InfoScadenza>@((Myroom.IsFree) ? "" : "sino al 15/06/21")</InfoScadenza>
+                    </Room>
+                </CascadingValue>
             </CascadingValue>
         </div>
     }
@@ -27,7 +33,7 @@
 
 @if (@BookedRoom != null)
 {
-    <span>Hai prenotato la stanza @BookedRoom.Description</span>
+    <span>Prenota la stanza @BookedRoom.Description cliccando <a href="bookroom?IdRoom=@BookedRoom.Id&Promo=true">qui</a></span>
 }
 
 
@@ -35,7 +41,13 @@
 
     public Rooms BookedRoom { get; set; }
 
+    [Parameter]
+    public string idRoom { get; set; }
+    [Parameter]
+    public string IsPromo { get; set; }
+
     public string InfoPromo = "Stanza in Promozione";
+    public string InfoPromo2 = "Stanza Non Disponibile";
 
     List<Rooms> RoomList;
 
@@ -43,7 +55,15 @@
     {
         base.OnInitialized();
 
-        RoomList = roomsService.GetRooms();
+        if (idRoom != null)
+        {
+            RoomList = roomsService.GetRooms().Where(e => e.Id == Int16.Parse(idRoom)).ToList();
+        }
+        else
+        {
+            RoomList = roomsService.GetRooms();
+        }
+
 
     }
 
