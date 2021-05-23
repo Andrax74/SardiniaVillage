@@ -19,8 +19,10 @@ namespace RoomsWebApi.Services
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            /*
             modelBuilder.Entity<Rooms>()
                 .HasKey(a => a.Id);
+            */
         }
     }
 }
