@@ -1,0 +1,8 @@
+﻿Per Eseguire la Creazione del database Sqlite:
+
+a) dotnet tool install --global dotnet-ef  --> Se non installato in precedenza 
+b) dotnet ef migrations add DbMigration --> genera il file di migrazione
+c) dotnet ef database update --> genera il database
+
+Update Tool
+dotnet tool update --global dotnet-ef

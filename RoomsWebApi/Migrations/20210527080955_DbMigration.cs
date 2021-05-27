@@ -2,7 +2,7 @@
 
 namespace RoomsWebApi.Migrations
 {
-    public partial class RoomsDbMigration : Migration
+    public partial class DbMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,8 +14,7 @@ namespace RoomsWebApi.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Price = table.Column<double>(type: "float", nullable: true),
-                    IsFree = table.Column<bool>(type: "bit", nullable: false),
+                    State = table.Column<int>(type: "int", nullable: false),
                     Beds = table.Column<int>(type: "int", nullable: true),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
